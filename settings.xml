@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <apiKeys>
+    <groq>gsk_your_groq_key_here</groq>
+  </apiKeys>
+</settings>

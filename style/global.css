@@ -1,0 +1,48 @@
+/* ═══════════════════════════════════════
+   SENTRA — Global Reset & Base Styles
+   ═══════════════════════════════════════ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background: var(--bg-primary);
+    font-family: var(--font-body);
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* Mobile-first viewport cap */
+.screen {
+    width: 100%;
+    max-width: 430px;
+    min-height: 100dvh;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    display: none;
+    /* hidden by default; router shows the active one */
+}
+
+.screen.active {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Utility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}

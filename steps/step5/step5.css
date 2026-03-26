@@ -1,0 +1,147 @@
+/* ════════════════════════════
+   STEP 5 — Meaning Check
+════════════════════════════ */
+#step5 {
+    background: var(--bg-primary);
+    display: none;
+    flex-direction: column;
+    padding: 60px 24px 120px;
+    min-height: 100vh;
+}
+
+#step5.active {
+    display: flex;
+}
+
+.verdict-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 450px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ── Verdict Card ── */
+.verdict-card {
+    width: 100%;
+    border-radius: 32px;
+    padding: 40px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.6s var(--ease);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+}
+
+/* Status Themes */
+.verdict-card.match {
+    background-color: #E8F5E9;
+    color: #2E7D32;
+    border: 1px solid rgba(46, 125, 50, 0.1);
+}
+
+.verdict-card.neutral {
+    background-color: #FFF8E1;
+    color: #F57F17;
+    border: 1px solid rgba(245, 127, 23, 0.1);
+}
+
+.verdict-card.conflict {
+    background-color: #FFEBEE;
+    color: #C62828;
+    border: 1px solid rgba(198, 40, 40, 0.1);
+}
+
+.verdict-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.verdict-icon svg {
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+}
+
+.verdict-badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    opacity: 0.8;
+}
+
+.verdict-title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.verdict-description {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    opacity: 0.9;
+}
+
+/* ── Reasoning Section ── */
+.verdict-reasoning {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: left;
+    font-size: 13px;
+    margin-bottom: 32px;
+}
+
+.reasoning-item {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.reasoning-item:last-child {
+    margin-bottom: 0;
+}
+
+.reason-bullet {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* ── Actions ── */
+.verdict-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.action-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.action-link:hover {
+    opacity: 1;
+}

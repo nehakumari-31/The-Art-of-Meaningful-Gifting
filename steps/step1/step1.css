@@ -1,0 +1,364 @@
+/* ════════════════════════════
+   STEP 1 — Build Their World
+════════════════════════════ */
+#step1 {
+    background: var(--bg-primary);
+    padding-bottom: 120px;
+    overflow-x: hidden;
+}
+
+.canvas-container {
+    padding: 0 24px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.canvas {
+    width: 100%;
+    height: 440px;
+    background: linear-gradient(135deg, #F0EBE3 0%, #E8E3DA 100%);
+    border-radius: 40px;
+    border: 1px solid rgba(193, 127, 62, 0.15);
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.08),
+        inset 0 0 30px rgba(255, 255, 255, 0.4);
+    position: relative;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s var(--ease);
+    overflow: hidden;
+}
+
+.canvas::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+}
+
+.canvas-counter {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    z-index: 5;
+}
+
+.canvas-placeholder {
+    text-align: center;
+    opacity: 0.8;
+}
+
+.canvas-cta-box {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    padding: 40px 32px;
+    border-radius: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+.canvas-cta-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    color: #1A1A1A;
+    margin-bottom: 4px;
+}
+
+.canvas-cta-sub {
+    font-size: 12px;
+    color: #666;
+}
+
+.canvas-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    gap: 12px;
+    position: absolute;
+    inset: 0;
+    padding: 40px 20px;
+    pointer-events: none;
+}
+
+.canvas-content>* {
+    pointer-events: auto;
+}
+
+/* Signal Visuals on Canvas */
+.signal-item {
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    max-width: 200px;
+}
+
+.signal-item.bubble {
+    border-radius: 16px 16px 16px 4px;
+    background: #FFF;
+    font-style: italic;
+}
+
+.signal-item.trait {
+    background: var(--accent);
+    color: white;
+    border-radius: 99px;
+}
+
+.signal-item.image-card {
+    width: 100px;
+    height: 120px;
+    padding: 4px;
+    border-radius: 12px;
+    flex-direction: column;
+}
+
+.signal-item.image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.signal-item.reject {
+    background: #FFE4E1;
+    border: 1px solid #FFC1C1;
+    color: #D32F2F;
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8) rotate(-5deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+
+/* Floating Toolbar */
+.toolbar-container {
+    position: fixed;
+    bottom: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 48px);
+    max-width: 382px;
+    z-index: 20;
+}
+
+.toolbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.toolbar-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    padding: 10px 4px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #8E7FA6;
+}
+
+.toolbar-btn svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+}
+
+.toolbar-btn span {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.toolbar-btn.active {
+    background: var(--accent);
+    color: white;
+}
+
+.toolbar-btn:hover:not(.active) {
+    background: rgba(193, 127, 62, 0.05);
+    color: var(--accent);
+}
+
+/* Modal / Overlay */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.overlay.active {
+    display: flex;
+}
+
+.overlay-content {
+    background: white;
+    width: 100%;
+    max-width: 360px;
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s var(--ease);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.overlay-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.overlay-header h3 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: #F5F5F5;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.signal-option-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.option-item {
+    padding: 14px;
+    background: #F9F9F9;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.option-item:hover {
+    background: #F0F0F0;
+    border-color: var(--accent);
+}
+
+.option-item.selected {
+    background: rgba(193, 127, 62, 0.1);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.input-group textarea {
+    width: 100%;
+    height: 100px;
+    padding: 12px;
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+}
+
+.input-group textarea:focus {
+    border-color: var(--accent);
+}
+
+.overlay-footer {
+    margin-top: 24px;
+}
+
+.add-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}

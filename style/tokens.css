@@ -1,0 +1,39 @@
+/* ═══════════════════════════════════════
+   SENTRA — Design Tokens
+   ═══════════════════════════════════════ */
+
+:root {
+  /* ── Colors ── */
+  --bg-primary:    #F7F4EF;   /* warm off-white */
+  --bg-purple:     #4B2A75;   /* deep purple (Step 1) */
+  --canvas-pink:   #F4A7C1;   /* canvas bg (Step 1) */
+  --card-bg:       #FFFFFF;
+  --accent:        #C17F3E;   /* warm bronze */
+  --accent-hover:  #A86A2E;
+  --amber-check:   #F59E0B;
+  --text-dark:     #1A1A1A;
+  --text-muted:    #888888;
+  --text-light:    #F7F4EF;
+  --border-light:  #E8E3DA;
+  --shadow-soft:   0 4px 24px rgba(0,0,0,0.08);
+  --shadow-card:   0 2px 12px rgba(0,0,0,0.07);
+
+  /* ── Spacing ── */
+  --sp-xs:  4px;
+  --sp-sm:  8px;
+  --sp-md:  16px;
+  --sp-lg:  24px;
+  --sp-xl:  40px;
+
+  /* ── Radii ── */
+  --radius-card:   16px;
+  --radius-btn:    12px;
+  --radius-chip:   999px;
+
+  /* ── Typography ── */
+  --font-body:     'Inter', sans-serif;
+  --font-display:  'Outfit', sans-serif;
+
+  /* ── Transitions ── */
+  --ease:  cubic-bezier(0.4, 0, 0.2, 1);
+}

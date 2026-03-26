@@ -1,0 +1,132 @@
+/* ════════════════════════════
+   STEP 4 — Gift Selection Path
+════════════════════════════ */
+#step4 {
+    background: var(--bg-primary);
+    display: none;
+    flex-direction: column;
+    padding: 60px 24px 120px;
+    min-height: 100vh;
+}
+
+#step4.active {
+    display: flex;
+}
+
+.selection-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ── Custom Input Path ── */
+.input-path {
+    width: 100%;
+    text-align: center;
+}
+
+.gift-input-wrapper {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.gift-textarea {
+    width: 100%;
+    min-height: 120px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    padding: 24px;
+    font-family: inherit;
+    font-size: 18px;
+    color: var(--text-main);
+    resize: none;
+    outline: none;
+    transition: all 0.4s var(--ease);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.gift-textarea:focus {
+    background: #fff;
+    border-color: var(--brand-bronze);
+    box-shadow: 0 10px 30px rgba(193, 127, 62, 0.1);
+    transform: translateY(-2px);
+}
+
+.gift-textarea::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+    font-style: italic;
+}
+
+/* ── Divider ── */
+.choice-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    opacity: 0.4;
+}
+
+.choice-divider::before,
+.choice-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: currentColor;
+}
+
+.choice-divider span {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* ── Sentra Path ── */
+.sentra-path {
+    width: 100%;
+}
+
+.secondary-action-btn {
+    width: 100%;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid rgba(193, 127, 62, 0.2);
+    border-radius: 20px;
+    color: var(--brand-bronze);
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s var(--ease);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.secondary-action-btn:hover {
+    background: #FDFBFA;
+    border-color: var(--brand-bronze);
+    box-shadow: 0 8px 24px rgba(193, 127, 62, 0.08);
+}
+
+.secondary-action-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+/* ── Bottom Bar Fix ── */
+.bottom-bar .continue-btn.secondary {
+    background: transparent;
+    color: var(--brand-bronze);
+    border: 1px solid var(--brand-bronze);
+}

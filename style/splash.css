@@ -1,0 +1,222 @@
+/* ═══════════════════════════════════════
+   SENTRA — Splash Screen Styles
+   ═══════════════════════════════════════ */
+
+#splash {
+    background: var(--bg-primary);
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100dvh;
+}
+
+/* ── Hero Image ── */
+.splash__hero {
+    position: relative;
+    width: 100%;
+    height: 52vh;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.splash__hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    transform: scale(1.04);
+    animation: heroReveal 1.4s var(--ease) forwards;
+}
+
+/* Warm gradient overlay fading into bg */
+.splash__hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(247, 244, 239, 0.08) 0%,
+            rgba(247, 244, 239, 0.55) 70%,
+            rgba(247, 244, 239, 1) 100%);
+}
+
+@keyframes heroReveal {
+    from {
+        transform: scale(1.12);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1.04);
+        opacity: 1;
+    }
+}
+
+/* ── Content Area ── */
+.splash__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 var(--sp-xl) var(--sp-xl);
+    text-align: center;
+    margin-top: -32px;
+    /* overlap hero slightly */
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Logo Mark ── */
+.splash__logomark {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 24px rgba(193, 127, 62, 0.35);
+    opacity: 0;
+    animation: fadeUp 0.7s var(--ease) 0.8s forwards;
+}
+
+.splash__logomark svg {
+    width: 26px;
+    height: 26px;
+    fill: white;
+}
+
+/* ── App Name ── */
+.splash__name {
+    font-family: var(--font-display);
+    font-size: 52px;
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    color: var(--text-dark);
+    line-height: 1;
+    opacity: 0;
+    animation: fadeUp 0.8s var(--ease) 1s forwards;
+}
+
+.splash__name span {
+    color: var(--accent);
+}
+
+/* ── Etymology Badge ── */
+.splash__etymology {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 14px;
+    border-radius: var(--radius-chip);
+    background: rgba(193, 127, 62, 0.1);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    opacity: 0;
+    animation: fadeUp 0.7s var(--ease) 1.2s forwards;
+}
+
+/* ── Tagline ── */
+.splash__tagline {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text-dark);
+    line-height: 1.35;
+    margin-top: 24px;
+    max-width: 300px;
+    opacity: 0;
+    animation: fadeUp 0.7s var(--ease) 1.4s forwards;
+}
+
+/* ── Subtext ── */
+.splash__subtext {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-top: 10px;
+    max-width: 280px;
+    opacity: 0;
+    animation: fadeUp 0.7s var(--ease) 1.6s forwards;
+}
+
+/* ── CTA ── */
+.splash__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 36px;
+    width: 100%;
+    max-width: 320px;
+    padding: 18px 32px;
+    border-radius: var(--radius-btn);
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 28px rgba(193, 127, 62, 0.38);
+    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.2s;
+    opacity: 0;
+    animation: fadeUp 0.7s var(--ease) 1.8s forwards;
+    text-decoration: none;
+}
+
+.splash__cta:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 36px rgba(193, 127, 62, 0.45);
+}
+
+.splash__cta:active {
+    transform: translateY(0);
+}
+
+.splash__cta-arrow {
+    font-size: 20px;
+    transition: transform 0.2s var(--ease);
+}
+
+.splash__cta:hover .splash__cta-arrow {
+    transform: translateX(4px);
+}
+
+/* ── Trust Dots ── */
+.splash__dots {
+    display: flex;
+    gap: 6px;
+    margin-top: 28px;
+    opacity: 0;
+    animation: fadeUp 0.6s var(--ease) 2s forwards;
+}
+
+.splash__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--border-light);
+}
+
+.splash__dot.active {
+    background: var(--accent);
+    width: 18px;
+    border-radius: 3px;
+}
+
+/* ── Keyframes ── */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description"
+    content="Sentra — From 'I hope they like it' to 'I know they'll love it'. Gifting powered by sentiment, centered on them." />
+  <title>Sentra — Meaningful Gifting</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="steps/shared/tokens.css">
+  <link rel="stylesheet" href="steps/shared/global.css">
+
+  <!-- Step Styles -->
+  <link rel="stylesheet" href="steps/splash/splash.css">
+  <link rel="stylesheet" href="steps/step0/step0.css">
+  <link rel="stylesheet" href="steps/step1/step1.css">
+  <link rel="stylesheet" href="steps/step2/step2.css">
+  <link rel="stylesheet" href="steps/step3/step3.css">
+  <link rel="stylesheet" href="steps/step4/step4.css">
+  <link rel="stylesheet" href="steps/step5/step5.css">
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════
+       SPLASH SCREEN
+  ══════════════════════════════ -->
+  <section id="splash" class="screen" role="main" aria-label="Sentra Welcome Screen">
+    <div class="splash__hero">
+      <img src="assets/hero.png" alt="Beautifully wrapped gift with dried flowers and a handwritten note" />
+    </div>
+    <div class="splash__content">
+      <div class="splash__logomark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+        </svg>
+      </div>
+      <h1 class="splash__name">Sentr<span>a</span></h1>
+      <span class="splash__etymology">Sentiment · Center</span>
+      <p class="splash__tagline">
+        From <em>"I hope they like it"</em><br />
+        to <strong>"I know they'll love it."</strong>
+      </p>
+      <p class="splash__subtext">
+        We triangulate their environment, their digital taste,
+        and their personal history — so every gift lands.
+      </p>
+      <button id="splash-cta" class="splash__cta" aria-label="Get started with Sentra">
+        Get Started
+        <span class="splash__cta-arrow" aria-hidden="true">→</span>
+      </button>
+      <div class="splash__dots" aria-hidden="true">
+        <div class="splash__dot active"></div>
+        <div class="splash__dot"></div>
+        <div class="splash__dot"></div>
+        <div class="splash__dot"></div>
+        <div class="splash__dot"></div>
+        <div class="splash__dot"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════
+       STEP 0 — Occasion Selector
+  ══════════════════════════════ -->
+  <section id="step0" class="screen" role="main" aria-label="Occasion Selector">
+    <header>
+      <div class="step-label">Step 1 of 6</div>
+      <h2 class="step-title">Let's choose the moment</h2>
+      <p class="step-subtext">Pick the one that fits — we’ll use this to personalise the gift direction.</p>
+    </header>
+
+    <div class="occasion-grid" id="occasion-grid">
+      <!-- Birthday -->
+      <div class="occasion-card" data-id="birthday">
+        <div class="card-image"><img src="assets/birthday.png" alt="Birthday"></div>
+        <div class="card-info">
+          <h3 class="card-title">Birthday</h3>
+          <p class="card-desc">Celebrating someone’s special day</p>
+        </div>
+        <div class="card-checkmark">✓</div>
+      </div>
+
+      <!-- Celebration -->
+      <div class="occasion-card" data-id="celebration">
+        <div class="card-image"><img src="assets/celebration.png" alt="Celebration"></div>
+        <div class="card-info">
+          <h3 class="card-title">Celebration</h3>
+          <p class="card-desc">Anniversary · Wedding · Promotion</p>
+          <div class="add-custom-cta" onclick="toggleCustomInput(event, 'celebration')">+ Add your own</div>
+          <div class="custom-input-container" id="input-celebration">
+            <input type="text" class="custom-input" placeholder="Type and press Enter"
+              onkeydown="handleCustomInput(event, 'celebration')">
+          </div>
+          <div class="chips-container" id="chips-celebration"></div>
+        </div>
+        <div class="card-checkmark">✓</div>
+      </div>
+
+      <!-- Festival -->
+      <div class="occasion-card" data-id="festival">
+        <div class="card-image"><img src="assets/festival.png" alt="Festival"></div>
+        <div class="card-info">
+          <h3 class="card-title">Festival</h3>
+          <p class="card-desc">Diwali · Christmas · Eid · Holi</p>
+          <div class="add-custom-cta" onclick="toggleCustomInput(event, 'festival')">+ Add your own</div>
+          <div class="custom-input-container" id="input-festival">
+            <input type="text" class="custom-input" placeholder="e.g. Onam, Rakhi"
+              onkeydown="handleCustomInput(event, 'festival')">
+          </div>
+          <div class="chips-container" id="chips-festival"></div>
+        </div>
+        <div class="card-checkmark">✓</div>
+      </div>
+
+      <!-- Informal -->
+      <div class="occasion-card" data-id="informal">
+        <div class="card-image"><img src="assets/informal.png" alt="Informal"></div>
+        <div class="card-info">
+          <h3 class="card-title">Informal</h3>
+          <p class="card-desc">Just because · Thank you · Thinking of you</p>
+          <div class="add-custom-cta" onclick="toggleCustomInput(event, 'informal')">+ Add your own</div>
+          <div class="custom-input-container" id="input-informal">
+            <input type="text" class="custom-input" placeholder="e.g. Apology, Cheer up"
+              onkeydown="handleCustomInput(event, 'informal')">
+          </div>
+          <div class="chips-container" id="chips-informal"></div>
+        </div>
+        <div class="card-checkmark">✓</div>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <button id="step0-continue" class="continue-btn disabled">Continue <span
+          style="font-size: 20px;">→</span></button>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════
+       STEP 1 — Build Their World
+  ══════════════════════════════ -->
+  <section id="step1" class="screen" role="main" aria-label="Build Their World">
+    <header>
+      <div class="step-label">Step 2 of 6</div>
+      <h2 class="step-title">Build their world</h2>
+      <p class="step-subtext">Add fragments of their life to create a rich recipient snapshot.
+      </p>
+    </header>
+
+    <div class="canvas-container">
+      <div class="canvas" id="world-canvas">
+        <div class="canvas-counter" id="canvas-count-badge">0 things added</div>
+
+        <!-- Placeholder visuals in the canvas -->
+        <div class="canvas-placeholder" id="canvas-empty-state">
+          <div class="canvas-cta-box">
+            <div class="canvas-cta-title">Start building their world —</div>
+            <div class="canvas-cta-sub">Tap an icon below to add a signal</div>
+          </div>
+        </div>
+
+        <!-- This is where added signals will appear -->
+        <div class="canvas-content" id="canvas-items"></div>
+      </div>
+    </div>
+
+    <!-- Floating Toolbar -->
+    <div class="toolbar-container">
+      <div class="toolbar">
+        <button class="toolbar-btn" onclick="openSignalModal('image')" title="Upload Image">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
+          </svg>
+          <span>Image</span>
+        </button>
+        <button class="toolbar-btn" onclick="openSignalModal('moment')" title="Add Moment">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
+          </svg>
+          <span>Moment</span>
+        </button>
+        <button class="toolbar-btn active" onclick="openSignalModal('traits')" title="Choose Traits">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+          </svg>
+          <span>Traits</span>
+        </button>
+        <button class="toolbar-btn" onclick="openSignalModal('them')" title="This is Them">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+          </svg>
+          <span>Them</span>
+        </button>
+        <button class="toolbar-btn" onclick="openSignalModal('event')" title="Life Event">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z" />
+          </svg>
+          <span>Event</span>
+        </button>
+        <button class="toolbar-btn" onclick="openSignalModal('rejects')" title="Reject / Avoid">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z" />
+          </svg>
+          <span>Reject</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Signal Selection Overlay (Modal-like) -->
+    <div id="signal-overlay" class="overlay">
+      <div class="overlay-content">
+        <div class="overlay-header">
+          <h3 id="overlay-title">Add Signal</h3>
+          <button class="close-btn" onclick="closeSignalModal()">×</button>
+        </div>
+        <div id="overlay-body"></div>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <button id="step1-continue" class="continue-btn disabled">Continue <span
+          style="font-size: 20px;">→</span></button>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════
+       STEP 2 — Signal Aggregation
+  ══════════════════════════════ -->
+  <section id="step2" class="screen" role="main" aria-label="Signal Aggregation">
+    <!-- Loader View -->
+    <div id="loader-container" class="loader-container">
+      <div class="loader-pulse">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+        </svg>
+      </div>
+      <div class="loader-text" id="loader-text">Triangulating data points...</div>
+    </div>
+
+    <!-- Summary View -->
+    <div id="summary-container" class="summary-container">
+      <div class="summary-card">
+        <h2 class="summary-title">Summary revealed.</h2>
+        <div id="summary-groups" class="summary-list">
+          <!-- Dynamic summary items will appear here -->
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <button id="step2-continue" class="continue-btn active">Perfect, look for gifts <span
+            style="font-size: 20px;">→</span></button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════
+       STEP 3 — Meaning Reveal
+  ══════════════════════════════ -->
+  <section id="step3" class="screen" role="main" aria-label="Meaning Reveal">
+    <header class="insights-header">
+      <div class="step-label">Step 3 of 6</div>
+      <h2 class="step-title">What we discovered</h2>
+      <p class="step-subtext">Translating your signals into a meaningful gifting strategy.</p>
+    </header>
+
+    <div id="insights-list" class="insights-container">
+      <!-- Dynamic insight cards will appear here -->
+    </div>
+
+    <div class="bottom-bar">
+      <button id="step3-continue" class="continue-btn active">Build my options <span
+          style="font-size: 20px;">→</span></button>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════
+       STEP 4 — Selection Path
+  ══════════════════════════════ -->
+  <section id="step4" class="screen" role="main" aria-label="Gift Selection Path">
+    <header>
+      <div class="step-label">Step 4 of 6</div>
+      <h2 class="step-title">What do you have in mind?</h2>
+      <p class="step-subtext">Propose an idea for Sentra to validate, or let us curate for you.</p>
+    </header>
+
+    <div class="selection-content">
+      <!-- Path A: Custom Idea -->
+      <div class="input-path">
+        <div class="gift-input-wrapper">
+          <textarea id="gift-proposal" class="gift-textarea"
+            placeholder="e.g. A vintage film camera or a calligraphy set..."></textarea>
+        </div>
+        <button id="check-idea-btn" class="continue-btn disabled" style="margin-top: 20px;">
+          Check this idea
+        </button>
+      </div>
+
+      <!-- Divider -->
+      <div class="choice-divider">
+        <span>OR</span>
+      </div>
+
+      <!-- Path B: Sentra Suggestions -->
+      <div class="sentra-path">
+        <div class="gift-input-wrapper" style="margin-bottom: 12px;">
+          <input id="groq-api-key" type="password" class="gift-textarea"
+            style="min-height: 48px; height: 48px; padding-top: 12px;"
+            placeholder="Optional: Groq API key for dynamic AI suggestions (gsk_...)" />
+        </div>
+        <button id="sentra-suggest-btn" class="secondary-action-btn">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+          </svg>
+          Sentra, suggest something
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════
+       STEP 5 — Meaning Check
+  ══════════════════════════════ -->
+  <section id="step5" class="screen" role="main" aria-label="Meaning Check">
+    <header>
+      <div class="step-label">Step 5 of 6</div>
+      <h2 class="step-title">The Sentra Verdict</h2>
+      <p class="step-subtext">Evaluating how your idea aligns with their personal landscape.</p>
+    </header>
+
+    <div class="verdict-container">
+      <div id="verdict-view" class="verdict-card">
+        <!-- Dynamic verdict content will appear here -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════
+       STEP 6 — Gift Options
+  ══════════════════════════════ -->
+  <section id="step6" class="screen" role="main" aria-label="Gift Options">
+    <header class="curation-header">
+      <div class="step-label">Step 6 of 6</div>
+      <h2 class="step-title">The Curated Gallery</h2>
+      <p class="step-subtext">Handpicked selections based on their creative landscape.</p>
+    </header>
+
+    <div class="category-section">
+      <h4 class="category-title">Recommended for them</h4>
+      <div id="gift-options-list" class="gift-grid-scroll">
+        <!-- Dynamic gift cards will appear here -->
+      </div>
+    </div>
+
+    <div class="selection-footer">
+      <p class="fine-print">Every suggestion is triangulated from the signals you've shared.</p>
+      <button class="add-custom-cta" style="margin-top: 10px;" onclick="showScreen('step4')">← Try another idea</button>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════
+       STEP 7 — Final Selection & Selection
+  ══════════════════════════════ -->
+  <section id="step7" class="screen" role="main" aria-label="Final Selection">
+    <div id="final-hero-view" class="final-hero">
+      <!-- Dynamic gift hero will appear here -->
+    </div>
+
+    <div class="ritual-container">
+      <div class="ritual-card">
+        <div class="ritual-header">
+          <span class="ritual-icon">✨</span>
+          <h2 id="ritual-title" class="ritual-title">A Meaningful Presentation</h2>
+        </div>
+
+        <div id="ritual-steps">
+          <!-- Dynamic ritual steps will appear here -->
+        </div>
+
+        <div class="final-actions">
+          <button class="continue-btn active" onclick="alert('Gift selection saved to profile!')">Confirm
+            Selection</button>
+          <div class="restart-link" onclick="restartJourney()">Start a new journey</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shared & Step Modules -->
+  <script src="steps/shared/router.js"></script>
+  <script src="steps/splash/splash.js"></script>
+  <script src="steps/step0/step0.js"></script>
+  <script src="steps/step1/step1.js"></script>
+  <script src="steps/step2/step2.js"></script>
+  <script src="steps/step3/step3.js"></script>
+  <script src="steps/step4/step4.js"></script>
+  <script src="steps/step5/step5.js"></script>
+  <script src="steps/step6/step6.js"></script>
+  <script src="steps/step7/step7.js"></script>
+</body>
+
+</html>

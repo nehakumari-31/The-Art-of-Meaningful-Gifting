@@ -1,0 +1,116 @@
+/* ════════════════════════════
+   STEP 3 — Meaning Reveal
+════════════════════════════ */
+#step3 {
+    background: var(--bg-primary);
+    display: none;
+    flex-direction: column;
+    padding: 60px 24px 120px;
+    min-height: 100vh;
+}
+
+#step3.active {
+    display: flex;
+}
+
+.insights-header {
+    margin-bottom: 40px;
+    animation: fadeIn 0.8s var(--ease);
+}
+
+.insights-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* ── Insight Card ── */
+.insight-card {
+    border-radius: 28px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.insight-card.reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Color Themes */
+.insight-card.lavender {
+    background-color: #F3EEF9;
+    color: #5B4D70;
+}
+
+.insight-card.sage {
+    background-color: #EBF2ED;
+    color: #4B6150;
+}
+
+.insight-card.sand {
+    background-color: #F8F3ED;
+    color: #705B4D;
+}
+
+.insight-icon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 16px;
+    opacity: 0.8;
+}
+
+.insight-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+.insight-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.insight-text {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.grounded-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 99px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Cascade effect */
+.insight-card:nth-child(1) {
+    transition-delay: 0.2s;
+}
+
+.insight-card:nth-child(2) {
+    transition-delay: 0.5s;
+}
+
+.insight-card:nth-child(3) {
+    transition-delay: 0.8s;
+}
