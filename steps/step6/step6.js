@@ -175,11 +175,9 @@ async function renderGiftOptions() {
         card.onclick = () => selectGift(gift);
 
         card.innerHTML = `
-            <img src="${gift.image}" alt="${gift.name}" class="gift-card-image" onerror="this.src='assets/hero.png'">
             <div class="gift-card-content">
                 <div class="gift-badge">${getGiftBadge(gift)}</div>
                 <h3 class="gift-name">${gift.name}</h3>
-                <p class="gift-price">${gift.price}</p>
                 <div class="gift-why">
                     <p class="gift-why-label">Why it fits</p>
                     <p class="gift-why-text">"${gift.why}"</p>

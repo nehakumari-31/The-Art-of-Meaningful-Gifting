@@ -17,7 +17,7 @@
 
 .canvas {
     width: 100%;
-    height: 440px;
+    min-height: 520px;
     background: linear-gradient(135deg, #F0EBE3 0%, #E8E3DA 100%);
     border-radius: 40px;
     border: 1px solid rgba(193, 127, 62, 0.15);
@@ -93,13 +93,12 @@
     height: 100%;
     display: flex;
     flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
+    align-content: flex-start;
+    justify-content: flex-start;
     gap: 12px;
-    position: absolute;
-    inset: 0;
-    padding: 40px 20px;
-    pointer-events: none;
+    position: relative;
+    padding: 62px 16px 16px;
+    overflow-y: auto;
 }
 
 .canvas-content>* {
@@ -119,8 +118,8 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    max-width: 200px;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    max-width: 100%;
 }
 
 .signal-item.bubble {

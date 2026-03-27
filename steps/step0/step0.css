@@ -171,15 +171,16 @@
 
 /* Bottom Button */
 .bottom-bar {
-    position: fixed;
+    position: sticky;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    transform: none;
     width: 100%;
     max-width: 430px;
     padding: 14px 20px 16px;
     background: linear-gradient(to top, var(--bg-primary) 80%, rgba(247, 244, 239, 0));
     z-index: 10;
+    margin-top: auto;
 }
 
 .continue-btn {

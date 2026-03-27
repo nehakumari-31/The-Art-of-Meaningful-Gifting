@@ -49,10 +49,10 @@ function renderSummary() {
     // Note: signals is defined in step1.js and managed globally
     const categories = {
         traits: "Personality Traits",
-        moment: "Key Moments",
+        moments: "Key Moments",
         them: "Personal History",
         event: "Life Events",
-        reject: "Avoid / Rejects"
+        rejects: "Avoid / Rejects"
     };
 
     for (const [key, label] of Object.entries(categories)) {
@@ -70,7 +70,7 @@ function renderSummary() {
 
             items.forEach(val => {
                 const pill = document.createElement('div');
-                pill.className = `summary-pill ${key === 'reject' ? 'reject' : ''}`;
+                pill.className = `summary-pill ${key === 'rejects' ? 'reject' : ''}`;
 
                 if (key === 'image') {
                     pill.innerText = "Captured Visual Reference";

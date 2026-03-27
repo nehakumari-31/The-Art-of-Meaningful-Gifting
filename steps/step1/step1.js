@@ -39,9 +39,18 @@ function openSignalModal(type) {
         <div style="width: 100%; height: 120px; border: 2px dashed #DDD; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
           <svg viewBox="0 0 24 24" style="width: 48px; fill: #DDD;"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
         </div>
-        <button class="add-btn" onclick="handleSignalAdd('image', 'assets/hero.png')">Simulate Upload</button>
+        <input id="image-upload-input" type="file" accept="image/*" style="display:none;" />
+        <button class="add-btn" onclick="document.getElementById('image-upload-input').click()">Choose image</button>
       </div>
     `;
+    const fileInput = document.getElementById('image-upload-input');
+    fileInput?.addEventListener('change', (event) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => handleSignalAdd('image', e.target?.result);
+      reader.readAsDataURL(file);
+    });
   } else {
     const options = signalOptions[type] || [];
     body.innerHTML = `
@@ -101,12 +110,6 @@ function updateCanvas() {
       } else {
         item.innerText = val;
       }
-
-      // Randomize position slightly
-      item.style.position = 'absolute';
-      item.style.left = `${10 + (Math.random() * 60)}%`;
-      item.style.top = `${15 + (Math.random() * 60)}%`;
-      item.style.transform = `rotate(${(Math.random() * 20) - 10}deg)`;
 
       container.appendChild(item);
     });

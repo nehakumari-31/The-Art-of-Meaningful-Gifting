@@ -14,10 +14,12 @@
 /* Horizontal Scroll Grid */
 .gift-grid-scroll {
     display: flex;
-    overflow-x: auto;
-    gap: 20px;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    gap: 14px;
     padding: 10px 24px 32px;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: none;
     scrollbar-width: none;
     /* Hide scrollbar Firefox */
     -ms-overflow-style: none;
@@ -31,8 +33,9 @@
 
 /* Gift Card */
 .gift-card {
-    flex: 0 0 280px;
-    scroll-snap-align: center;
+    flex: 0 0 auto;
+    width: 100%;
+    scroll-snap-align: none;
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -47,13 +50,6 @@
 .gift-card:hover {
     transform: translateY(-8px) scale(1.02);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-.gift-card-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .gift-card-content {
@@ -80,16 +76,9 @@
     margin-bottom: 4px;
 }
 
-.gift-price {
-    font-size: 14px;
-    color: var(--color-grey);
-    margin-bottom: 16px;
-    font-family: 'Inter', sans-serif;
-}
-
 .gift-why {
     border-top: 1px solid rgba(0, 0, 0, 0.05);
-    padding-top: 16px;
+    padding-top: 12px;
 }
 
 .gift-why-label {
@@ -109,7 +98,7 @@
 
 /* Category Sections */
 .category-section {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .category-title {
