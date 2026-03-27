@@ -1,6 +1,12 @@
 // ── Step 1 Logic ────────────────────────────────
+const CANVAS_SIGNAL_KEYS = ['traits', 'moments', 'them', 'event', 'rejects', 'image'];
+let pendingImageValue = "";
+
 function getSignalCount() {
-  return Object.values(signals).reduce((acc, curr) => acc + (Array.isArray(curr) ? curr.length : 0), 0);
+  return CANVAS_SIGNAL_KEYS.reduce((acc, key) => {
+    const arr = signals[key];
+    return acc + (Array.isArray(arr) ? arr.length : 0);
+  }, 0);
 }
 
 
@@ -34,6 +40,7 @@ function openSignalModal(type) {
       </div>
     `;
   } else if (type === 'image') {
+    pendingImageValue = "";
     body.innerHTML = `
       <div class="input-group" style="text-align: center; padding: 20px;">
         <div style="width: 100%; height: 120px; border: 2px dashed #DDD; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
@@ -41,14 +48,22 @@ function openSignalModal(type) {
         </div>
         <input id="image-upload-input" type="file" accept="image/*" style="display:none;" />
         <button class="add-btn" onclick="document.getElementById('image-upload-input').click()">Choose image</button>
+        <button id="image-add-btn" class="add-btn" style="margin-top: 10px; opacity: 0.5;" disabled onclick="handleSignalAdd('image', pendingImageValue)">Add to World</button>
       </div>
     `;
     const fileInput = document.getElementById('image-upload-input');
+    const imageAddBtn = document.getElementById('image-add-btn');
     fileInput?.addEventListener('change', (event) => {
       const file = event.target.files?.[0];
       if (!file) return;
       const reader = new FileReader();
-      reader.onload = (e) => handleSignalAdd('image', e.target?.result);
+      reader.onload = (e) => {
+        const result = e.target && typeof e.target.result === 'string' ? e.target.result : "";
+        if (!result) return;
+        pendingImageValue = result;
+        imageAddBtn.disabled = false;
+        imageAddBtn.style.opacity = "1";
+      };
       reader.readAsDataURL(file);
     });
   } else {
@@ -73,7 +88,10 @@ function handleSignalAdd(type, value) {
     if (!value) return;
   }
 
+  if (type === 'image' && !value) return;
+
   if (!Array.isArray(signals[stateKey])) signals[stateKey] = [];
+  if (signals[stateKey].includes(value)) return;
   signals[stateKey].push(value);
   saveState();
 
@@ -94,28 +112,68 @@ function handleSignalAdd(type, value) {
   document.getElementById('canvas-empty-state').style.display = 'none';
 }
 
+function removeSignal(type, index) {
+  if (!Array.isArray(signals[type])) return;
+  signals[type].splice(index, 1);
+  saveState();
+  updateCanvas();
+  updateStep1Controls();
+}
+
+function updateStep1Controls() {
+  const count = getSignalCount();
+  const countBadge = document.getElementById('canvas-count-badge');
+  const continueBtn1 = document.getElementById('step1-continue');
+  const emptyState = document.getElementById('canvas-empty-state');
+
+  if (countBadge) countBadge.innerText = `${count} thing${count !== 1 ? 's' : ''} added`;
+  if (emptyState) emptyState.style.display = count > 0 ? 'none' : 'block';
+  if (continueBtn1) {
+    continueBtn1.classList.toggle('disabled', count === 0);
+    continueBtn1.classList.toggle('active', count > 0);
+  }
+}
+
 function updateCanvas() {
   const container = document.getElementById('canvas-items');
   container.innerHTML = '';
 
-  // Simple logic to place items on canvas
-  for (const type in signals) {
+  for (const type of CANVAS_SIGNAL_KEYS) {
     if (!Array.isArray(signals[type])) continue;
-    signals[type].forEach(val => {
+    signals[type].forEach((val, idx) => {
       const item = document.createElement('div');
       item.className = `signal-item ${type === 'moments' ? 'bubble' : (type === 'traits' ? 'trait' : (type === 'image' ? 'image-card' : (type === 'rejects' ? 'reject' : '')))}`;
 
       if (type === 'image') {
-        item.innerHTML = `<img src="${val}" alt="Signal">`;
+        item.innerHTML = `<img src="${val}" alt="Signal"><button class="signal-remove-btn" type="button" aria-label="Remove image">x</button>`;
       } else {
-        item.innerText = val;
+        item.innerHTML = `<span>${val}</span><button class="signal-remove-btn" type="button" aria-label="Remove item">x</button>`;
       }
+
+      const removeBtn = item.querySelector('.signal-remove-btn');
+      removeBtn?.addEventListener('click', (event) => {
+        event.stopPropagation();
+        removeSignal(type, idx);
+      });
 
       container.appendChild(item);
     });
   }
 }
 
+function initStep1() {
+  updateCanvas();
+  updateStep1Controls();
+}
+
+window.addEventListener('hashchange', () => {
+  if (window.location.hash === '#step1') initStep1();
+});
+
+if (window.location.hash === '#step1') {
+  initStep1();
+}
+
 document.getElementById('step1-continue')?.addEventListener('click', () => {
-  showScreen('step2');
+  if (getSignalCount() > 0) showScreen('step2');
 });

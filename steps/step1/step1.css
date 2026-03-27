@@ -17,7 +17,8 @@
 
 .canvas {
     width: 100%;
-    min-height: 520px;
+    min-height: 420px;
+    max-height: calc(100dvh - 250px);
     background: linear-gradient(135deg, #F0EBE3 0%, #E8E3DA 100%);
     border-radius: 40px;
     border: 1px solid rgba(193, 127, 62, 0.15);
@@ -120,6 +121,8 @@
     gap: 10px;
     animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     max-width: 100%;
+    position: relative;
+    padding-right: 34px;
 }
 
 .signal-item.bubble {
@@ -140,6 +143,29 @@
     padding: 4px;
     border-radius: 12px;
     flex-direction: column;
+}
+
+.signal-remove-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 12px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signal-item.image-card .signal-remove-btn {
+    top: 4px;
+    right: 4px;
 }
 
 .signal-item.image-card img {
