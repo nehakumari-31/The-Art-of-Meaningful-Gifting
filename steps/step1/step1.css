@@ -3,15 +3,15 @@
 ════════════════════════════ */
 #step1 {
     background: var(--bg-primary);
-    padding-bottom: 120px;
+    padding-bottom: 92px;
     overflow-x: hidden;
 }
 
 .canvas-container {
-    padding: 0 24px;
+    padding: 8px 24px 0;
     flex: 1;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 }
 
@@ -171,7 +171,7 @@
 /* Floating Toolbar */
 .toolbar-container {
     position: fixed;
-    bottom: 110px;
+    bottom: 88px;
     left: 50%;
     transform: translateX(-50%);
     width: calc(100% - 48px);

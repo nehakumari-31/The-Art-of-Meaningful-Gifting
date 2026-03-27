@@ -1,6 +1,6 @@
 // ── Step 1 Logic ────────────────────────────────
 function getSignalCount() {
-  return Object.values(signals).reduce((acc, curr) => acc + (Array.isArray(curr) ? curr.length : 0), 0) - (signals.occasion ? 1 : 0) - (signals.userGiftIdea ? 1 : 0);
+  return Object.values(signals).reduce((acc, curr) => acc + (Array.isArray(curr) ? curr.length : 0), 0);
 }
 
 
@@ -57,13 +57,15 @@ function closeSignalModal() {
 }
 
 function handleSignalAdd(type, value) {
+  const stateKey = type === 'moment' ? 'moments' : type;
+
   if (type === 'moment') {
     value = document.getElementById('moment-input').value.trim();
     if (!value) return;
   }
 
-  if (!signals[type]) signals[type] = [];
-  signals[type].push(value);
+  if (!Array.isArray(signals[stateKey])) signals[stateKey] = [];
+  signals[stateKey].push(value);
   saveState();
 
 
@@ -89,9 +91,10 @@ function updateCanvas() {
 
   // Simple logic to place items on canvas
   for (const type in signals) {
+    if (!Array.isArray(signals[type])) continue;
     signals[type].forEach(val => {
       const item = document.createElement('div');
-      item.className = `signal-item ${type === 'moment' ? 'bubble' : (type === 'traits' ? 'trait' : (type === 'image' ? 'image-card' : (type === 'rejects' ? 'reject' : '')))}`;
+      item.className = `signal-item ${type === 'moments' ? 'bubble' : (type === 'traits' ? 'trait' : (type === 'image' ? 'image-card' : (type === 'rejects' ? 'reject' : '')))}`;
 
       if (type === 'image') {
         item.innerHTML = `<img src="${val}" alt="Signal">`;

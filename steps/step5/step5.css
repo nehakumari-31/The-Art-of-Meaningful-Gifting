@@ -5,7 +5,7 @@
     background: var(--bg-primary);
     display: none;
     flex-direction: column;
-    padding: 60px 24px 120px;
+    padding: 28px 24px 92px;
     min-height: 100vh;
 }
 

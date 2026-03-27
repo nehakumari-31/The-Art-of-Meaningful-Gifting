@@ -1,5 +1,5 @@
 #step0 {
-    padding: 40px 24px;
+    padding: 28px 24px;
 }
 
 .step-label {
@@ -20,7 +20,7 @@
 .step-subtext {
     font-size: 14px;
     color: var(--text-muted);
-    margin-bottom: 32px;
+    margin-bottom: 20px;
 }
 
 .occasion-grid {
@@ -177,7 +177,7 @@
     transform: translateX(-50%);
     width: 100%;
     max-width: 430px;
-    padding: 24px;
+    padding: 14px 20px 16px;
     background: linear-gradient(to top, var(--bg-primary) 80%, rgba(247, 244, 239, 0));
     z-index: 10;
 }
