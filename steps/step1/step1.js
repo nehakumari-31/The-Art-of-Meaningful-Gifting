@@ -1,5 +1,5 @@
 // ── Step 1 Logic ────────────────────────────────
-const CANVAS_SIGNAL_KEYS = ['traits', 'moments', 'them', 'event', 'rejects', 'image'];
+const CANVAS_SIGNAL_KEYS = ['traits', 'moments', 'them', 'spending', 'preferences', 'event', 'rejects', 'image'];
 let pendingImageValue = "";
 
 function getSignalCount() {
@@ -12,9 +12,15 @@ function getSignalCount() {
 
 const signalOptions = {
   traits: ["Introvert", "Creative", "Minimalist", "Techie", "Outdoorsy", "Sentimental", "Humorous", "Practical"],
-  them: ["A messy desk with plants", "Morning coffee routine", "Loves vintage vinyl", "Hiker at heart", "Night owl"],
-  event: ["New Job", "Just Moved", "First Anniversary", "Promotion", "Graduation"],
-  rejects: ["No flowers", "Discards generic cards", "Avoids plastic", "Not a cook", "Hates bright colors"]
+  spending: ["Saves money", "Splurges on experiences", "Buys useful things", "Loves premium stuff"],
+  preferences: ["Are useful", "Feel emotional", "Are aesthetic", "Are experiences"],
+  rejects: [
+    "Flowers aren’t their thing",
+    "💌 Not into generic cards",
+    "♻️ Prefers sustainable choices",
+    "🍳 Doesn’t enjoy cooking",
+    "🎨 Prefers subtle colors"
+  ]
 };
 
 function openSignalModal(type) {
@@ -27,7 +33,13 @@ function openSignalModal(type) {
   if (activeBtn) activeBtn.classList.add('active');
 
   overlay.classList.add('active');
-  title.innerText = `Add ${type.charAt(0).toUpperCase() + type.slice(1)}`;
+  const modalTitles = {
+    them: "They enjoy",
+    spending: "How they spend",
+    preferences: "They prefer gifts that…",
+    rejects: "Not their vibe"
+  };
+  title.innerText = modalTitles[type] || `Add ${type.charAt(0).toUpperCase() + type.slice(1)}`;
 
   if (type === 'moment') {
     body.innerHTML = `
@@ -105,6 +117,15 @@ function openSignalModal(type) {
     body.innerHTML = `
       <div class="signal-option-list">
         ${options.map(opt => `<div class="option-item" data-value="${opt.replace(/"/g, '&quot;')}">${opt}</div>`).join('')}
+        ${(type === 'them' || type === 'preferences') ? `
+          <div class="input-group" style="margin-top: 16px;">
+            <label>${type === 'preferences' ? 'Others' : 'Other'}</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="${type}-other-input" class="custom-input" placeholder="${type === 'preferences' ? '-------' : 'e.g. Cooking, Gaming'}" style="flex: 1; border: 1px solid #DDD; padding: 10px; border-radius: 8px;" />
+              <button id="${type}-other-add-btn" class="add-btn" style="width: auto; padding: 10px 20px;">Add</button>
+            </div>
+          </div>
+        ` : ''}
       </div>
     `;
     body.querySelectorAll('.option-item').forEach((item) => {
@@ -113,6 +134,21 @@ function openSignalModal(type) {
         handleSignalAdd(type, value);
       });
     });
+
+    if (type === 'them' || type === 'preferences') {
+      const otherInput = document.getElementById(`${type}-other-input`);
+      const otherAddBtn = document.getElementById(`${type}-other-add-btn`);
+      otherAddBtn?.addEventListener('click', () => {
+        const val = otherInput.value.trim();
+        if (val) handleSignalAdd(type, val);
+      });
+      otherInput?.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          const val = otherInput.value.trim();
+          if (val) handleSignalAdd(type, val);
+        }
+      });
+    }
   }
 }
 

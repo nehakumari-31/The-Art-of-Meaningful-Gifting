@@ -6,6 +6,8 @@ const signals = JSON.parse(localStorage.getItem('sentra_signals')) || {
     event: [],
     image: [],
     moments: [],
+    spending: [],
+    preferences: [],
     rejects: [],
     userGiftIdea: "",
     groqApiKey: "",
