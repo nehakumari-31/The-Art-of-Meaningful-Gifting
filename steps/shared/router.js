@@ -1,5 +1,6 @@
 // ── Global State & Persistence ──────────────────
-const signals = JSON.parse(localStorage.getItem('sentra_signals')) || {
+// Reset signals on every refresh (per user requirement)
+const signals = {
     occasion: "",
     traits: [],
     them: [],
@@ -13,6 +14,8 @@ const signals = JSON.parse(localStorage.getItem('sentra_signals')) || {
     groqApiKey: "",
     dynamicSuggestions: []
 };
+// Optional: Clear existing storage to ensure a clean start
+localStorage.removeItem('sentra_signals');
 
 function saveState() {
     localStorage.setItem('sentra_signals', JSON.stringify(signals));
