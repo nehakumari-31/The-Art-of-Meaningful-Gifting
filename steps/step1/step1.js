@@ -133,8 +133,15 @@ function handleSignalAdd(type, value) {
   if (!Array.isArray(signals[stateKey])) signals[stateKey] = [];
   if (signals[stateKey].includes(value)) return;
   signals[stateKey].push(value);
-  saveState();
-
+  // Try to save, but proceed even if it fails (e.g. storage limit exceeded)
+  try {
+    saveState();
+  } catch (err) {
+    console.warn("Failed to save state to localStorage:", err);
+    if (type === 'image') {
+      alert("Note: This image is quite large and won't be saved for your next session, but you can use it now.");
+    }
+  }
 
   updateCanvas();
   closeSignalModal();
