@@ -10,7 +10,7 @@
     padding-bottom: calc(76px + 58px + 10px + env(safe-area-inset-bottom, 0px));
 }
 
-#step1 > header {
+#step1>header {
     flex-shrink: 0;
     padding: 12px 24px 6px;
 }
@@ -413,4 +413,13 @@
     border-radius: 12px;
     font-weight: 600;
     cursor: pointer;
+}
+
+#image-upload-dropzone:hover {
+    border-color: var(--accent) !important;
+    background-color: rgba(193, 127, 62, 0.05);
+}
+
+.image-upload-description h4 {
+    font-family: var(--font-display);
 }

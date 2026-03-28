@@ -45,8 +45,22 @@ function openSignalModal(type) {
     pendingImageValue = "";
     body.innerHTML = `
       <div class="input-group" style="text-align: center; padding: 20px;">
-        <div style="width: 100%; height: 120px; border: 2px dashed #DDD; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
-          <svg viewBox="0 0 24 24" style="width: 48px; fill: #DDD;"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+        <div class="image-upload-description" style="text-align: left; margin-bottom: 20px;">
+          <h4 style="margin: 0 0 8px 0; color: #444; font-size: 1.1rem;">A Glimpse Into Their World</h4>
+          <p style="margin: 0 0 4px 0; color: #666; font-size: 0.9rem;">Room / desk / recent photo</p>
+          <p style="margin: 0 0 12px 0; color: #666; font-size: 0.9rem;">Something they own or use daily</p>
+          <div style="background: rgba(183, 110, 48, 0.1); padding: 10px; border-radius: 8px; border-left: 4px solid #b76e30;">
+             <p style="margin: 0; color: #b76e30; font-size: 0.9rem; font-weight: 500;">
+               👉 Insight: lifestyle, taste, habits
+             </p>
+          </div>
+        </div>
+        <div id="image-upload-dropzone" style="width: 100%; height: 160px; border: 2px dashed #DDD; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden;">
+          <div id="image-placeholder-content" style="text-align: center;">
+            <svg viewBox="0 0 24 24" style="width: 48px; fill: #DDD;"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+            <p style="margin: 8px 0 0 0; color: #999; font-size: 0.85rem;">Click to upload</p>
+          </div>
+          <img id="image-preview" style="display: none; width: 100%; height: 100%; object-fit: cover;" />
         </div>
         <input id="image-upload-input" type="file" accept="image/*" style="display:none;" />
         <button id="image-choose-btn" class="add-btn">Choose image</button>
@@ -56,7 +70,13 @@ function openSignalModal(type) {
     const fileInput = document.getElementById('image-upload-input');
     const chooseImageBtn = document.getElementById('image-choose-btn');
     const imageAddBtn = document.getElementById('image-add-btn');
+    const dropzone = document.getElementById('image-upload-dropzone');
+    const preview = document.getElementById('image-preview');
+    const placeholderContent = document.getElementById('image-placeholder-content');
+
     chooseImageBtn?.addEventListener('click', () => fileInput?.click());
+    dropzone?.addEventListener('click', () => fileInput?.click());
+
     fileInput?.addEventListener('change', (event) => {
       const file = event.target.files?.[0];
       if (!file) return;
@@ -65,6 +85,15 @@ function openSignalModal(type) {
         const result = e.target && typeof e.target.result === 'string' ? e.target.result : "";
         if (!result) return;
         pendingImageValue = result;
+
+        // Show preview
+        if (preview && placeholderContent) {
+          preview.src = result;
+          preview.style.display = 'block';
+          placeholderContent.style.display = 'none';
+          dropzone.style.border = '2px solid #b76e30';
+        }
+
         imageAddBtn.disabled = false;
         imageAddBtn.style.opacity = "1";
       };
