@@ -12,6 +12,8 @@ function getSignalCount() {
 
 const signalOptions = {
   traits: ["Introvert", "Creative", "Minimalist", "Techie", "Outdoorsy", "Sentimental", "Humorous", "Practical"],
+  them: ["Coffee ☕", "Traveling ✈️", "Music 🎧", "Reading 📚", "Fitness 🏋️"],
+  event: ["New Job", "Just Moved", "First Anniversary", "Promotion", "Graduation"],
   spending: ["Saves money", "Splurges on experiences", "Buys useful things", "Loves premium stuff"],
   preferences: ["Are useful", "Feel emotional", "Are aesthetic", "Are experiences"],
   rejects: [
