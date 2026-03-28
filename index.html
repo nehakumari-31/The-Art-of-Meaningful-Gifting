@@ -27,6 +27,8 @@
   <link rel="stylesheet" href="steps/step3/step3.css">
   <link rel="stylesheet" href="steps/step4/step4.css">
   <link rel="stylesheet" href="steps/step5/step5.css">
+  <link rel="stylesheet" href="steps/step6/step6.css">
+  <link rel="stylesheet" href="steps/step7/step7.css">
 </head>
 
 <body>
@@ -394,31 +396,26 @@
   </section>
 
 
-  <!-- ══════════════════════════════
-       STEP 7 — Final Selection & Selection
-  ══════════════════════════════ -->
   <section id="step7" class="screen" role="main" aria-label="Final Selection">
+    <header class="final-header">
+      <h2 class="step-title">Curated just for them</h2>
+      <p class="step-subtext">Why these fit them</p>
+    </header>
+
     <div id="final-hero-view" class="final-hero">
       <!-- Dynamic gift hero will appear here -->
     </div>
 
-    <div class="ritual-container">
-      <div class="ritual-card">
-        <div class="ritual-header">
-          <span class="ritual-icon">✨</span>
-          <h2 id="ritual-title" class="ritual-title">A Meaningful Presentation</h2>
-        </div>
-
-        <div id="ritual-steps">
-          <!-- Dynamic ritual steps will appear here -->
-        </div>
-
-        <div class="final-actions">
-          <button class="continue-btn active" onclick="alert('Gift selection saved to profile!')">Confirm
-            Selection</button>
-          <div class="restart-link" onclick="restartJourney()">Start a new journey</div>
-        </div>
+    <div class="recommendations-gallery">
+      <div id="scrollable-cards" class="scroll-cards-container">
+        <!-- Dynamic scrollable cards will appear here -->
       </div>
+    </div>
+
+    <div class="final-actions-footer">
+      <button class="action-btn refine-btn" onclick="showScreen('step6')">Refine</button>
+      <button class="action-btn save-btn" onclick="saveFinalSelection()">Save</button>
+      <button class="action-btn surprise-btn" onclick="surpriseMe()">Surprise me</button>
     </div>
   </section>
 

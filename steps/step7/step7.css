@@ -1,135 +1,140 @@
-/* ── Step 7: Final Selection & Selection ── */
-
 #step7 {
-    background-color: var(--color-cream);
-    padding-bottom: 40px;
+    background-color: var(--bg-primary);
+    padding: 28px 24px 100px;
+    /* Space for bottom actions */
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.final-header {
+    text-align: center;
+}
+
+.final-header .step-title {
+    font-size: 28px;
+    margin-bottom: 4px;
 }
 
 .final-hero {
     width: 100%;
-    max-height: 400px;
-    position: relative;
+    min-height: 200px;
+    background: white;
+    border-radius: var(--radius-card);
     overflow: hidden;
-    margin-bottom: 32px;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
 }
 
 .final-hero img {
     width: 100%;
-    height: 100%;
+    height: 160px;
     object-fit: cover;
 }
 
-.final-hero-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.4));
-    padding: 40px 24px 20px;
-    color: white;
+.hero-details {
+    padding: 16px;
 }
 
-.final-badge {
-    display: inline-block;
-    padding: 6px 16px;
-    background: var(--color-bronze);
-    color: white;
-    border-radius: 20px;
-    font-size: 12px;
+.hero-title {
+    font-size: 18px;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 8px;
-    box-shadow: 0 4px 10px rgba(193, 127, 62, 0.3);
-}
-
-.final-gift-name {
-    font-size: 32px;
-    font-weight: 800;
-    font-family: 'DM Serif Display', serif;
-}
-
-/* Ritual Section */
-.ritual-container {
-    padding: 0 24px;
-}
-
-.ritual-card {
-    background: white;
-    border-radius: 24px;
-    padding: 32px 24px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
-    margin-bottom: 32px;
-    border: 1px solid rgba(0, 0, 0, 0.02);
-}
-
-.ritual-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-.ritual-icon {
-    font-size: 24px;
-}
-
-.ritual-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--color-charcoal);
-}
-
-.ritual-step {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 24px;
-}
-
-.step-num {
-    flex: 0 0 28px;
-    height: 28px;
-    background: var(--color-sand);
-    color: var(--color-bronze);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 14px;
-}
-
-.step-content h4 {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--color-charcoal);
     margin-bottom: 4px;
 }
 
-.step-content p {
+.hero-why {
     font-size: 14px;
-    color: var(--color-grey);
-    line-height: 1.5;
+    color: var(--text-muted);
+    line-height: 1.4;
 }
 
-/* Footer Actions */
-.final-actions {
+/* Scrollable Cards */
+.recommendations-gallery {
+    margin: 0 -24px;
+    /* bleed to edges */
+}
+
+.scroll-cards-container {
+    display: flex;
+    gap: 16px;
+    padding: 4px 24px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    /* hide for clean UI */
+}
+
+.scroll-cards-container::-webkit-scrollbar {
+    display: none;
+}
+
+.rec-card {
+    flex: 0 0 160px;
+    background: white;
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: var(--shadow-card);
+    scroll-snap-align: start;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    margin-top: 20px;
+    gap: 8px;
 }
 
-.restart-link {
-    text-align: center;
-    color: var(--color-bronze);
-    font-weight: 700;
+.rec-card img {
+    width: 100%;
+    height: 100px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.rec-name {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Actions Footer */
+.final-actions-footer {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 430px;
+    background: white;
+    padding: 16px 24px calc(16px + env(safe-area-inset-bottom, 0px));
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.05);
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
     font-size: 14px;
-    text-decoration: none;
+    font-weight: 600;
     cursor: pointer;
-    margin-top: 10px;
+    transition: all 0.2s;
 }
 
-.restart-link:hover {
-    text-decoration: underline;
+.refine-btn {
+    background: #F0EDE8;
+    color: var(--text-dark);
+}
+
+.save-btn {
+    background: var(--accent);
+    color: white;
+}
+
+.surprise-btn {
+    background: #E8E3DA;
+    color: var(--text-dark);
+}
+
+.action-btn:active {
+    transform: scale(0.98);
 }
