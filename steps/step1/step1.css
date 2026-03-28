@@ -1,36 +1,50 @@
 /* ════════════════════════════
    STEP 1 — Build Their World
 ════════════════════════════ */
+/* Fill viewport: canvas stretches between header and fixed toolbar + Continue (they are out of flow). */
 #step1 {
     background: var(--bg-primary);
-    padding-bottom: 92px;
+    min-height: 100dvh;
     overflow-x: hidden;
+    /* Reserve space so flex canvas stops above fixed UI (Continue ~76px + toolbar ~56px + breathing room) */
+    padding-bottom: calc(76px + 58px + 10px + env(safe-area-inset-bottom, 0px));
+}
+
+#step1 > header {
+    flex-shrink: 0;
+    padding: 12px 24px 6px;
+}
+
+#step1 .step-subtext {
+    margin-bottom: 10px;
 }
 
 .canvas-container {
-    padding: 8px 24px 0;
-    flex: 1;
+    padding: 6px 20px 0;
+    flex: 1 1 auto;
+    min-height: 0;
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: stretch;
 }
 
 .canvas {
     width: 100%;
-    min-height: 420px;
-    max-height: calc(100dvh - 250px);
-    background: linear-gradient(135deg, #F0EBE3 0%, #E8E3DA 100%);
-    border-radius: 40px;
+    flex: 1 1 auto;
+    min-height: 220px;
+    background: linear-gradient(140deg, #FFF3E7 0%, #F5ECFF 45%, #EAF7F4 100%);
+    border-radius: 32px;
     border: 1px solid rgba(193, 127, 62, 0.15);
     box-shadow:
         0 30px 60px rgba(0, 0, 0, 0.08),
         inset 0 0 30px rgba(255, 255, 255, 0.4);
     position: relative;
-    padding: 24px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: stretch;
+    justify-content: flex-start;
     transition: all 0.4s var(--ease);
     overflow: hidden;
 }
@@ -63,8 +77,13 @@
 }
 
 .canvas-placeholder {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 .canvas-cta-box {
@@ -90,16 +109,18 @@
 }
 
 .canvas-content {
+    flex: 1 1 auto;
+    min-height: 0;
     width: 100%;
-    height: 100%;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
     justify-content: flex-start;
-    gap: 12px;
+    gap: 10px;
     position: relative;
-    padding: 62px 16px 16px;
+    padding: 56px 12px 12px;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .canvas-content>* {
@@ -127,12 +148,13 @@
 
 .signal-item.bubble {
     border-radius: 16px 16px 16px 4px;
-    background: #FFF;
+    background: #FFFFFF;
     font-style: italic;
+    border-color: #E7DFFF;
 }
 
 .signal-item.trait {
-    background: var(--accent);
+    background: linear-gradient(135deg, #7D57C1 0%, #A37BDE 100%);
     color: white;
     border-radius: 99px;
 }
@@ -176,9 +198,14 @@
 }
 
 .signal-item.reject {
-    background: #FFE4E1;
-    border: 1px solid #FFC1C1;
+    background: #FFECEC;
+    border: 1px solid #FFCCCC;
     color: #D32F2F;
+}
+
+.signal-item:not(.trait):not(.reject):not(.image-card):not(.bubble) {
+    background: #EFFAF6;
+    border-color: #CDEFE2;
 }
 
 @keyframes popIn {
@@ -193,13 +220,13 @@
     }
 }
 
-/* Floating Toolbar */
+/* Floating Toolbar — sits just above fixed Continue bar */
 .toolbar-container {
     position: fixed;
-    bottom: 88px;
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
     left: 50%;
     transform: translateX(-50%);
-    width: calc(100% - 48px);
+    width: calc(100% - 40px);
     max-width: 382px;
     z-index: 20;
 }

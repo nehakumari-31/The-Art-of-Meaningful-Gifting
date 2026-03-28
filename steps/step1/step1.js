@@ -36,9 +36,11 @@ function openSignalModal(type) {
         <textarea id="moment-input" placeholder="e.g. 'I miss our long walks in the park...'"></textarea>
       </div>
       <div class="overlay-footer">
-        <button class="add-btn" onclick="handleSignalAdd('moment')">Add to World</button>
+        <button id="moment-add-btn" class="add-btn">Add to World</button>
       </div>
     `;
+    const momentAddBtn = document.getElementById('moment-add-btn');
+    momentAddBtn?.addEventListener('click', () => handleSignalAdd('moment'));
   } else if (type === 'image') {
     pendingImageValue = "";
     body.innerHTML = `
@@ -47,12 +49,14 @@ function openSignalModal(type) {
           <svg viewBox="0 0 24 24" style="width: 48px; fill: #DDD;"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
         </div>
         <input id="image-upload-input" type="file" accept="image/*" style="display:none;" />
-        <button class="add-btn" onclick="document.getElementById('image-upload-input').click()">Choose image</button>
-        <button id="image-add-btn" class="add-btn" style="margin-top: 10px; opacity: 0.5;" disabled onclick="handleSignalAdd('image', pendingImageValue)">Add to World</button>
+        <button id="image-choose-btn" class="add-btn">Choose image</button>
+        <button id="image-add-btn" class="add-btn" style="margin-top: 10px; opacity: 0.5;" disabled>Add to World</button>
       </div>
     `;
     const fileInput = document.getElementById('image-upload-input');
+    const chooseImageBtn = document.getElementById('image-choose-btn');
     const imageAddBtn = document.getElementById('image-add-btn');
+    chooseImageBtn?.addEventListener('click', () => fileInput?.click());
     fileInput?.addEventListener('change', (event) => {
       const file = event.target.files?.[0];
       if (!file) return;
@@ -66,13 +70,20 @@ function openSignalModal(type) {
       };
       reader.readAsDataURL(file);
     });
+    imageAddBtn?.addEventListener('click', () => handleSignalAdd('image', pendingImageValue));
   } else {
     const options = signalOptions[type] || [];
     body.innerHTML = `
       <div class="signal-option-list">
-        ${options.map(opt => `<div class="option-item" onclick="handleSignalAdd('${type}', '${opt}')">${opt}</div>`).join('')}
+        ${options.map(opt => `<div class="option-item" data-value="${opt.replace(/"/g, '&quot;')}">${opt}</div>`).join('')}
       </div>
     `;
+    body.querySelectorAll('.option-item').forEach((item) => {
+      item.addEventListener('click', () => {
+        const value = item.getAttribute('data-value') || "";
+        handleSignalAdd(type, value);
+      });
+    });
   }
 }
 
@@ -173,6 +184,9 @@ window.addEventListener('hashchange', () => {
 if (window.location.hash === '#step1') {
   initStep1();
 }
+
+window.openSignalModal = openSignalModal;
+window.closeSignalModal = closeSignalModal;
 
 document.getElementById('step1-continue')?.addEventListener('click', () => {
   if (getSignalCount() > 0) showScreen('step2');
