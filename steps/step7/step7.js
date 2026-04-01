@@ -39,8 +39,13 @@ function selectAnotherGift(giftId) {
 
 function saveFinalSelection() {
     const gift = signals.selectedGift;
+    console.log('Attempting to save gift:', gift);
     if (gift) {
+        console.log('Transitioning to step8');
         showScreen('step8');
+    } else {
+        console.warn('No gift selected, cannot transition to step8');
+        alert('Please select a gift first!');
     }
 }
 

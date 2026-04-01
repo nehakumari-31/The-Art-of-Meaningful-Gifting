@@ -1,3 +1,4 @@
+console.log('step8.js loaded');
 document.addEventListener('DOMContentLoaded', () => {
     const confidenceBtns = document.querySelectorAll('.scale-btn');
     const intentBtns = document.querySelectorAll('.intent-btn');
