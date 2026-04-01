@@ -20,9 +20,9 @@
 
 .feedback-label {
     font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 500;
-    color: var(--text-dark);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #000000;
     line-height: 1.4;
 }
 
@@ -35,14 +35,14 @@
 
 .scale-btn {
     flex: 1;
-    height: 56px;
-    border: 1.5px solid var(--border-light);
+    height: 60px;
+    border: 2px solid #D1CAC0;
     background: #FFFFFF;
     border-radius: 12px;
     font-family: var(--font-display);
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text-dark);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #000000;
     cursor: pointer;
     transition: all 0.2s var(--ease);
 }
@@ -78,13 +78,13 @@
 
 .intent-btn {
     padding: 16px 20px;
-    border: 1.5px solid var(--border-light);
+    border: 2px solid #D1CAC0;
     background: #FFFFFF;
     border-radius: 16px;
     font-family: var(--font-body);
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--text-dark);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #000000;
     text-align: left;
     cursor: pointer;
     transition: all 0.2s var(--ease);
@@ -95,9 +95,9 @@
 
 .intent-btn::after {
     content: '';
-    width: 20px;
-    height: 20px;
-    border: 1.5px solid var(--border-light);
+    width: 24px;
+    height: 24px;
+    border: 2px solid #D1CAC0;
     border-radius: 50%;
     transition: all 0.2s var(--ease);
 }
