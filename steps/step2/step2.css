@@ -7,8 +7,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 40px 24px 120px;
-    /* Fixed viewport height makes overflow-y: auto actually scroll */
+    padding: 40px 24px 40px;
     height: 100dvh;
     max-height: 100dvh;
     overflow-y: auto;
@@ -97,11 +96,25 @@
     display: none;
     /* hidden initially */
     width: 100%;
-    max-width: 380px;
+    max-width: 100%;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     animation: fadeInUp 0.8s var(--ease) forwards;
     flex-shrink: 0;
+}
+
+/* In step2, the bottom-bar must NOT be fixed — it must flow below the card */
+#step2 .bottom-bar {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    background: transparent;
+    box-shadow: none;
+    padding: 16px 0 24px;
+    margin-top: 8px;
 }
 
 @keyframes fadeInUp {
