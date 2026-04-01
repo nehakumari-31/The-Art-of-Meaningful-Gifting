@@ -40,8 +40,7 @@ function selectAnotherGift(giftId) {
 function saveFinalSelection() {
     const gift = signals.selectedGift;
     if (gift) {
-        alert(`Successfully saved: ${gift.name}!`);
-        // Additional save logic could go here
+        showScreen('step8');
     }
 }
 

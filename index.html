@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="steps/step5/step5.css">
   <link rel="stylesheet" href="steps/step6/step6.css">
   <link rel="stylesheet" href="steps/step7/step7.css">
+  <link rel="stylesheet" href="steps/step8/step8.css">
 </head>
 
 <body>
@@ -419,6 +420,45 @@
     </div>
   </section>
 
+  <section id="step8" class="screen" role="main" aria-label="Feedback">
+    <header class="feedback-header">
+      <div class="step-label">Final Step</div>
+      <h2 class="step-title">One last thing...</h2>
+      <p class="step-subtext">How did we do? Your feedback helps Sentra get sharper.</p>
+    </header>
+
+    <div class="feedback-container">
+      <!-- Confidence Scale -->
+      <div class="feedback-group">
+        <label class="feedback-label">How confident are you that they’ll love this gift?</label>
+        <div class="confidence-scale" id="confidence-scale">
+          <button class="scale-btn" data-value="1">1</button>
+          <button class="scale-btn" data-value="2">2</button>
+          <button class="scale-btn" data-value="3">3</button>
+          <button class="scale-btn" data-value="4">4</button>
+          <button class="scale-btn" data-value="5">5</button>
+        </div>
+        <div class="scale-legend">
+          <span>Not at all</span>
+          <span>Extremely</span>
+        </div>
+      </div>
+
+      <!-- Action Intent -->
+      <div class="feedback-group">
+        <label class="feedback-label">Would you actually go ahead with one of these?</label>
+        <div class="intent-options">
+          <button class="intent-btn" data-value="yes">Yes, absolutely</button>
+          <button class="intent-btn" data-value="unsure">Still unsure, will think</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <button id="step8-finish" class="continue-btn disabled" onclick="finishJourney()">Finish Journey</button>
+    </div>
+  </section>
+
   <!-- Shared & Step Modules -->
   <script src="steps/shared/router.js"></script>
   <script src="steps/splash/splash.js"></script>
@@ -430,6 +470,7 @@
   <script src="steps/step5/step5.js"></script>
   <script src="steps/step6/step6.js"></script>
   <script src="steps/step7/step7.js"></script>
+  <script src="steps/step8/step8.js"></script>
 </body>
 
 </html>

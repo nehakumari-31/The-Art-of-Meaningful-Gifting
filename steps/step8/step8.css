@@ -1,0 +1,155 @@
+.feedback-header {
+    text-align: center;
+    padding: 60px 24px 40px;
+}
+
+.feedback-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 24px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.feedback-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.feedback-label {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    line-height: 1.4;
+}
+
+/* Confidence Scale */
+.confidence-scale {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.scale-btn {
+    flex: 1;
+    height: 56px;
+    border: 1.5px solid var(--border-light);
+    background: #FFFFFF;
+    border-radius: 12px;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: all 0.2s var(--ease);
+}
+
+.scale-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.scale-btn.selected {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(193, 127, 62, 0.25);
+}
+
+.scale-legend {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    padding: 0 4px;
+}
+
+/* Intent Options */
+.intent-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.intent-btn {
+    padding: 16px 20px;
+    border: 1.5px solid var(--border-light);
+    background: #FFFFFF;
+    border-radius: 16px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s var(--ease);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.intent-btn::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid var(--border-light);
+    border-radius: 50%;
+    transition: all 0.2s var(--ease);
+}
+
+.intent-btn:hover {
+    border-color: var(--accent);
+    background: rgba(193, 127, 62, 0.02);
+}
+
+.intent-btn.selected {
+    border-color: var(--accent);
+    background: rgba(193, 127, 62, 0.05);
+}
+
+.intent-btn.selected::after {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: inset 0 0 0 4px #FFFFFF;
+}
+
+/* Animations */
+#step8.active .feedback-group {
+    animation: slideUp 0.6s var(--ease) both;
+}
+
+#step8.active .feedback-group:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+#step8.active .feedback-group:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .confidence-scale {
+        gap: 6px;
+    }
+
+    .scale-btn {
+        height: 48px;
+        font-size: 1rem;
+    }
+}
