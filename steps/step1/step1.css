@@ -6,6 +6,8 @@
     background: var(--bg-primary);
     min-height: 100dvh;
     overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     /* Reserve space so flex canvas stops above fixed UI (Continue ~76px + toolbar ~56px + breathing room) */
     padding-bottom: calc(76px + 58px + 10px + env(safe-area-inset-bottom, 0px));
 }
@@ -46,7 +48,8 @@
     align-items: stretch;
     justify-content: flex-start;
     transition: all 0.4s var(--ease);
-    overflow: hidden;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .canvas::before {
@@ -120,7 +123,9 @@
     position: relative;
     padding: 56px 12px 12px;
     overflow-y: auto;
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
 }
 
 .canvas-content>* {
