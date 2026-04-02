@@ -108,12 +108,22 @@ def load_embedded_html() -> str:
 
 
 def main() -> None:
-    st.set_page_config(page_title="Sentra - Meaningful Gifting", layout="wide")
-    st.title("Sentra - Meaningful Gifting")
-    st.caption("Streamlit deployment wrapper for your existing frontend.")
+    st.set_page_config(page_title="Sentra - Meaningful Gifting", layout="centered")
+    st.markdown(
+        """
+        <style>
+          .block-container { padding-top: 0.8rem; padding-bottom: 0.8rem; }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
     html = load_embedded_html()
-    components.html(html, height=1100, scrolling=True)
+    phone_width = 393
+    phone_height = 852
+    left, center, right = st.columns([1, 3, 1])
+    with center:
+        components.html(html, width=phone_width, height=phone_height, scrolling=True)
 
 
 if __name__ == "__main__":
