@@ -25,7 +25,7 @@ function saveState() {
 window.signals = signals;
 
 // ── Router ──────────────────────────────────────
-const SCREENS = ['splash', 'step0', 'step1', 'step2', 'step3', 'step4', 'step5', 'step6', 'step7', 'step8'];
+const SCREENS = ['splash', 'step0', 'step1', 'step2', 'step3', 'step4', 'step5', 'step6', 'step8'];
 
 function showScreen(name) {
     document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));

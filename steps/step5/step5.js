@@ -32,7 +32,7 @@ function renderVerdict() {
         </div>
 
         <div class="verdict-actions">
-            <button class="continue-btn active" onclick="showScreen('step6')">Perfect, show variants</button>
+            <button class="continue-btn active" onclick="goToStep6FromVerdict()">Perfect, show variants</button>
             <div class="action-link" onclick="showScreen('step4')">Try a different idea</div>
         </div>
     `;
@@ -109,6 +109,13 @@ function analyzeIdea(idea) {
     }
 
     return { ...final, reasons };
+}
+
+function goToStep6FromVerdict() {
+    showScreen('step6');
+    if (typeof window.triggerStep6Render === 'function') {
+        window.triggerStep6Render();
+    }
 }
 
 // Hook into router

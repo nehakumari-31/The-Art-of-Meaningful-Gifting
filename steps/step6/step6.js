@@ -49,6 +49,8 @@ const GIFT_DATABASE = [
 ];
 
 async function getDynamicSuggestionsFromGroq() {
+    // API key is injected at runtime via window.__SENTRA_GROQ_KEY
+    // Never hardcode secrets in source files.
     const injectedKey = (window.__SENTRA_GROQ_KEY || "").trim();
     const apiKey = (signals.groqApiKey || injectedKey || "").trim();
     if (!apiKey) return null;
@@ -144,35 +146,38 @@ async function renderGiftOptions() {
     container.innerHTML = '';
     setLoadingState(container);
 
-    let dynamicGifts = signals.dynamicSuggestions;
-    if (!Array.isArray(dynamicGifts) || dynamicGifts.length === 0) {
-        const generated = await getDynamicSuggestionsFromGroq();
-        if (generated && generated.length > 0) {
-            signals.dynamicSuggestions = generated;
-            saveState();
-            dynamicGifts = generated;
-        }
+    // Always re-fetch fresh — results change with every new set of signals
+    const generated = await getDynamicSuggestionsFromGroq();
+    let displayGifts;
+
+    if (generated && generated.length > 0) {
+        // AI gifts are already tailored by the prompt — show them all as-is
+        signals.dynamicSuggestions = generated;
+        saveState();
+        displayGifts = generated;
+    } else {
+        // Static fallback: score each gift against current signals so different
+        // inputs always surface different items, then shuffle ties randomly.
+        const occasionNorm = (signals.occasion || "").toLowerCase();
+        const scored = GIFT_DATABASE.map(gift => {
+            const traitScore = (gift.traits || []).filter(t =>
+                (signals.traits || []).map(s => s.toLowerCase()).includes(t.toLowerCase())
+            ).length;
+            const occasionScore = (gift.occasions || []).some(o =>
+                o.toLowerCase() === occasionNorm
+            ) ? 1 : 0;
+            return { gift, score: traitScore + occasionScore, rand: Math.random() };
+        });
+        scored.sort((a, b) => b.score - a.score || b.rand - a.rand);
+        displayGifts = scored.map(s => s.gift);
     }
 
-    // Filter gifts based on signals
-    const sourcePool = Array.isArray(dynamicGifts) && dynamicGifts.length > 0 ? dynamicGifts : GIFT_DATABASE;
-    const filteredGifts = sourcePool.filter(gift => {
-        // Match by trait
-        const traitMatch = (gift.traits || []).some(t => (signals.traits || []).includes(t));
-        // Match by occasion
-        const occasionMatch = (gift.occasions || []).includes(signals.occasion);
-
-        return traitMatch || occasionMatch;
-    });
-
-    // If no specific matches, show all as "Curated for You"
-    const displayGifts = filteredGifts.length > 0 ? filteredGifts : sourcePool;
     container.innerHTML = '';
 
     displayGifts.forEach(gift => {
         const card = document.createElement('div');
         card.className = 'gift-card';
-        card.onclick = () => selectGift(gift);
+        card.style.cursor = 'default';
 
         card.innerHTML = `
             <div class="gift-card-content">
@@ -201,12 +206,7 @@ function getGiftBadge(gift) {
     return "Handpicked";
 }
 
-function selectGift(gift) {
-    signals.selectedGift = gift;
-    saveState();
-    showScreen('step7');
-    renderFinalSelection();
-}
+
 
 // Ensure rendering happens when screen is shown
 window.addEventListener('hashchange', () => {
@@ -214,6 +214,11 @@ window.addEventListener('hashchange', () => {
         renderGiftOptions();
     }
 });
+
+// Allow other modules to explicitly trigger a fresh render
+window.triggerStep6Render = function() {
+    renderGiftOptions();
+};
 
 // Initial check if we land directly on step6
 if (window.location.hash === '#step6') {

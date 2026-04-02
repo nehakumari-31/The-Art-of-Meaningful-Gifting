@@ -54,6 +54,10 @@ function handleSentraCuration() {
     signals.dynamicSuggestions = [];
     saveState();
     showScreen('step6'); // Skip to Gift Options
+    // Explicitly re-render with current signals (don't rely on hashchange alone)
+    if (typeof window.triggerStep6Render === 'function') {
+        window.triggerStep6Render();
+    }
 }
 
 // Hook into router
